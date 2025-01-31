@@ -19,6 +19,7 @@
         android:textSize="30sp" />
 
     <EditText
+        android:textColor="@color/white"
         android:id="@+id/edit_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
