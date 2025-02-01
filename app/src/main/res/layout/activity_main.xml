@@ -11,7 +11,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"/>
+        android:background="@color/white" />
 
     <LinearLayout
         android:id="@+id/linear_menu"
@@ -24,19 +24,21 @@
         android:paddingBottom="16dp">
 
         <ImageView
+            android:id="@+id/image_all"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:src="@drawable/ic_all_inclusive"
-            app:tint="@color/white" />
+            android:src="@drawable/ic_all_inclusive" />
 
         <ImageView
+            android:id="@+id/image_happy"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
             android:src="@drawable/ic_happy" />
 
         <ImageView
+            android:id="@+id/image_sunny"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
@@ -91,6 +93,6 @@
         android:fontFamily="@font/cabin"
         android:text="@string/new_phrase"
         android:textAllCaps="true"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white" />
 
 </RelativeLayout>

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.motivations.infra.MotivationConstants
@@ -14,6 +15,11 @@ import com.example.motivations.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityMainBinding
+    /* [3.1] Adcionando evento de click ao vetores
+    Criamos uma função category para identificar qual é o vetor que foi clicado
+    all = 1 | happy = 2 | sunny = 3, todos esses valores são costantes no MotivationCostants
+     */
+    private var categoryId = MotivationConstants.FILTER.ALL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,15 +36,26 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         supportActionBar?.hide()
 
         handleUserName()
+        handleFilter(R.id.image_all)
 
         //events
         binding.buttonNewPhrase.setOnClickListener(this)
+        binding.imageAll.setOnClickListener(this)
+        binding.imageSunny.setOnClickListener(this)
+        binding.imageHappy.setOnClickListener(this)
 
     }
 
+    /* [3.0] Adcionando evento de click ao vetores
+    Não quero que o onClick faça nenhum tratamento de lógica, desta forma quando algum dos 3 botões
+    forem clicados, onCiick chama handleFilter
+    {continua em [3.1] na função handleFilter}
+     */
     override fun onClick(view: View) {
         if (view.id == R.id.button_new_phrase) {
             var s = "a"
+        } else if (view.id in listOf(R.id.image_all, R.id.image_happy, R.id.image_sunny)) {
+            handleFilter(view.id)
         }
     }
 
@@ -53,4 +70,35 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding.textUserName.text = "Olá, $name!"
     }
 
+    /* [3.0] Adcionando evento de click ao vetores}
+    para adicionar a cor ao image quando for selecionado utilizamos setColorFilter,
+    mas se apenas usarmos setColorFilter(R.color.white) a cor não é expressa da forma correta,
+    por isso usamos ContextCompat.
+    ContextCompat.getColor é um metodo do Android utilizado para obter uma cor de recursos (R.color)
+    de forma compatível com diferentes versões do Android. Ele está na classe ContextCompat,
+    que faz parte da biblioteca AndroidX.
+    {continuar em [3.1] Acima}
+     */
+    private fun handleFilter(id: Int) {
+        binding.imageAll.setColorFilter(ContextCompat.getColor(this, R.color.dark_purple))
+        binding.imageHappy.setColorFilter(ContextCompat.getColor(this, R.color.dark_purple))
+        binding.imageSunny.setColorFilter(ContextCompat.getColor(this, R.color.dark_purple))
+
+        when (id) {
+            R.id.image_all -> {
+                binding.imageAll.setColorFilter(ContextCompat.getColor(this, R.color.white))
+                categoryId = MotivationConstants.FILTER.ALL
+            }
+
+            R.id.image_happy -> {
+                binding.imageHappy.setColorFilter(ContextCompat.getColor(this, R.color.white))
+                categoryId = MotivationConstants.FILTER.HAPPY
+            }
+
+            R.id.image_sunny -> {
+                binding.imageSunny.setColorFilter(ContextCompat.getColor(this, R.color.white))
+                categoryId = MotivationConstants.FILTER.SUNNY
+            }
+        }
+    }
 }
