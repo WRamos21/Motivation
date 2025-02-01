@@ -28,6 +28,8 @@ class UserActivity : AppCompatActivity(), View.OnClickListener {
         supportActionBar?.hide()
 
         binding.buttonSave.setOnClickListener(this)
+
+        verifyUserName()
     }
 
     override fun onClick(view: View) {
@@ -63,4 +65,15 @@ class UserActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    /* [2.5] Guardando dados
+    verifyUserName ira verificar se o usuario já tem nome cadastrado para já envia-lo para a
+    Activity Main
+     */
+    private fun verifyUserName() {
+        val name = SecurityPreferences(this).getString(MotivationConstants.KEY.USER_NAME)
+        if (name != ""){
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+    }
 }

@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     Criamos a funçãp handle e intanciamos dentro de onCreate para ser exibida quando a activityMain
     aparecer. Para exibir o nome do usuario na textUserName, intanciamos Security e usamos o metodo
     getSting implementado com key USER_NAME que está na classe de constantes (MotivationConstants)
-
+    {continua em [2.5] UserActivity}
     */
     private fun handleUserName() {
         val name = SecurityPreferences(this).getString(MotivationConstants.KEY.USER_NAME)
