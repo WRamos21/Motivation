@@ -27,14 +27,27 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         //Esconde barra de support
         supportActionBar?.hide()
 
+        handleUserName()
+
         //events
         binding.buttonNewPhrase.setOnClickListener(this)
 
     }
 
     override fun onClick(view: View) {
-        if (view.id == R.id.button_new_phrase){
+        if (view.id == R.id.button_new_phrase) {
             var s = "a"
         }
     }
+
+    /* [2.4] Guardando dados
+    Criamos a funçãp handle e intanciamos dentro de onCreate para ser exibida quando a activityMain
+    aparecer. Para exibir o nome do usuario na textUserName, intanciamos Security e usamos o metodo
+    getSting implementado com key USER_NAME
+    */
+    private fun handleUserName() {
+        val name = SecurityPreferences(this).getString("USER_NAME")
+        binding.textUserName.text = "Olá, $name!"
+    }
+
 }
