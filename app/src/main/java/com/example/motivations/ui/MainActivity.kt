@@ -1,12 +1,14 @@
-package com.example.motivations
+package com.example.motivations.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.motivations.infra.MotivationConstants
+import com.example.motivations.R
+import com.example.motivations.infra.SecurityPreferences
 import com.example.motivations.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -43,10 +45,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     /* [2.4] Guardando dados
     Criamos a funçãp handle e intanciamos dentro de onCreate para ser exibida quando a activityMain
     aparecer. Para exibir o nome do usuario na textUserName, intanciamos Security e usamos o metodo
-    getSting implementado com key USER_NAME
+    getSting implementado com key USER_NAME que está na classe de constantes (MotivationConstants)
+
     */
     private fun handleUserName() {
-        val name = SecurityPreferences(this).getString("USER_NAME")
+        val name = SecurityPreferences(this).getString(MotivationConstants.KEY.USER_NAME)
         binding.textUserName.text = "Olá, $name!"
     }
 
