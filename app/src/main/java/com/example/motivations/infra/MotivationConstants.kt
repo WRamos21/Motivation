@@ -10,7 +10,7 @@ class MotivationConstants private constructor(){
     }
     object FILTER {
         const val ALL = 1
-        const val HAPPY = 1
-        const val SUNNY = 1
+        const val HAPPY = 2
+        const val SUNNY = 3
     }
 }

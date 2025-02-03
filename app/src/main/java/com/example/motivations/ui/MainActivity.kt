@@ -2,6 +2,7 @@ package com.example.motivations.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -9,12 +10,14 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.motivations.infra.MotivationConstants
 import com.example.motivations.R
+import com.example.motivations.data.Mock
 import com.example.motivations.infra.SecurityPreferences
 import com.example.motivations.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityMainBinding
+
     /* [3.1] Adcionando evento de click ao vetores
     Criamos uma função category para identificar qual é o vetor que foi clicado
     all = 1 | happy = 2 | sunny = 3, todos esses valores são costantes no MotivationCostants
@@ -37,6 +40,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         handleUserName()
         handleFilter(R.id.image_all)
+        handleNextPhrase()
 
         //events
         binding.buttonNewPhrase.setOnClickListener(this)
@@ -53,11 +57,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
      */
     override fun onClick(view: View) {
         if (view.id == R.id.button_new_phrase) {
-            var s = "a"
+            handleNextPhrase()
+
         } else if (view.id in listOf(R.id.image_all, R.id.image_happy, R.id.image_sunny)) {
             handleFilter(view.id)
         }
     }
+
+    private fun newPhrase() {
+    }
+
 
     /* [2.4] Guardando dados
     Criamos a funçãp handle e intanciamos dentro de onCreate para ser exibida quando a activityMain
@@ -100,5 +109,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 categoryId = MotivationConstants.FILTER.SUNNY
             }
         }
+    }
+
+    private fun handleNextPhrase() {
+        val phrase = Mock().getPhrase(categoryId)
+        binding.textPhrase.text = phrase
     }
 }
